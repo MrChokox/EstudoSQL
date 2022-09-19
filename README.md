@@ -93,3 +93,71 @@ SELECT * FROM table WHERE column IN ('x','y')
 SELECT * FROM table WHERE column BETWEEN value1 AND value2
 ```
 -- Seleciono todos os valores dentro do intervalo definido por valor1 e 2 
+
+## ALIAS
+```sh
+SELECT Column AS alias_name FROM table 
+```
+-- Utilizo a palavra AS para nomear uma coluna ou tabela temporaria
+```sh
+SELECT Column1, Column2 + ', ' + Column3 + ' ' + Column4 + ', ' + Column5 AS ColumnsConcatened
+FROM table;
+```
+-- Utilizo a palavra AS para nomear uma coluna onde teve varias colunas concatenadas
+```sh
+SELECT o.Column1, o.Column2, c.Column1
+FROM Customers AS c, Orders AS o
+WHERE c.Column1='Around the Horn' AND c.Column2=o.CustomerID;
+```
+-- Atribuo um nome temporario a tabelas e as utilizo durante o comando
+
+## JOIN 
+```sh
+SELECT table.Column1, table.Column2, table.Column3
+FROM table
+INNER JOIN table2 ON table.Column1 = table2.Column1;
+```
+-- Faço a junção de duas tabelas que possuam uma referencia igual, existem diferentes tipos de JOINs
+
+ - (INNER) JOIN: Retorna registros que possuem valores correspondentes em ambas as tabelas
+ - LEFT (OUTER) JOIN: Retorna todos os registros da tabela da esquerda e os registros correspondentes da tabela da direita
+ - RIGHT (OUTER) JOIN: Retorna todos os registros da tabela da direita e os registros correspondentes da tabela da esquerda
+ - FULL (OUTER) JOIN: Retorna todos os registros quando há uma correspondência na tabela esquerda ou direita
+
+## UNION 
+```sh
+SELECT Column FROM table1
+UNION
+SELECT Column FROM table2
+ORDER BY Column;
+```
+-- Retorno valores distintos entre as colunas especificadas, de duas tabelas diferentes, posso utilizar UNION ALL para retornar valores duplicados também
+
+## GROUP BY 
+```sh
+SELECT column_name(s)
+FROM table_name
+WHERE condition
+GROUP BY column_name(s)
+```
+-- Agrupo todas as linhas de uma tabela que contenham mesmo valores
+
+## HAVING 
+```sh
+SELECT column_name(s)
+FROM table_name
+WHERE condition
+GROUP BY column_name(s)
+HAVING condition
+ORDER BY column_name(s);
+```
+-- Utilizado como se fosse o where porem para funções agregadas
+
+## EXISTS 
+```sh
+SELECT column_name(s)
+FROM table_name
+WHERE EXISTS
+(SELECT column_name FROM table_name WHERE condition);
+```
+-- Utilizado para verificar se uma condição existe, retorna true ou false
